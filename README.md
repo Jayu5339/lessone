@@ -34,5 +34,5 @@
 ```text
 lesson-note/
 ├── server-api/       # Spring Boot 3.5.3 (Java 21) - REST API Server
-├── client-admin/     # React + TypeScript (선생님/관리자용 웹)
+├── client-instructor/     # React + TypeScript (강사용 웹)
 └── client-student/   # React + TypeScript (학생용 웹/모바일)
