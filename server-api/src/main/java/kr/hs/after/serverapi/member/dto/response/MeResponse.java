@@ -1,4 +1,4 @@
-package kr.hs.after.serverapi.member.dto;
+package kr.hs.after.serverapi.member.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import kr.hs.after.serverapi.member.domain.MemberRole;

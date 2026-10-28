@@ -28,4 +28,17 @@
         WHERE id = #{id}
     </select>
 
+    <select id="existsByUsernameExcludingId" resultType="boolean">
+        SELECT COUNT(*) > 0 FROM members WHERE username = #{username} AND id != #{id}
+    </select>
+
+    <update id="updateProfile">
+        UPDATE members
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="username != null">username = #{username},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
 </mapper>
