@@ -1,0 +1,32 @@
+.auth-page { min-height: 100vh; display: flex; flex-direction: column; }
+.auth-header { min-height: 72px; padding: 0 40px; display: flex; align-items: center; gap: 10px; font-size: 18px; }
+.brand-mark { width: 24px; height: 24px; border-radius: 7px; background: #2457d6; }
+.auth-main { flex: 1; padding: 24px 24px 80px; display: flex; align-items: flex-start; justify-content: center; }
+
+.auth-card { width: 100%; max-width: 400px; box-sizing: border-box; padding: 40px; display: flex; flex-direction: column; gap: 22px; background: #fff; border: 1px solid #e3e6eb; border-radius: 16px; }
+.auth-card.wide { max-width: 440px; }
+.auth-head h1 { margin: 0 0 8px; font-size: 26px; font-weight: 700; }
+.auth-head p { margin: 0; font-size: 15px; line-height: 1.6; color: #5a6270; }
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: 14px; font-weight: 600; }
+.field input { height: 48px; box-sizing: border-box; padding: 0 14px; font: inherit; font-size: 16px; color: #14181f; background: #fff; border: 1px solid #8a93a2; border-radius: 10px; }
+.field input:focus, .check input:focus-visible { outline: 2px solid #2457d6; outline-offset: 1px; }
+.hint { font-size: 13px; color: #5a6270; }
+
+.check { display: flex; align-items: center; gap: 10px; font-size: 14px; line-height: 1.5; }
+.check input { width: 20px; height: 20px; margin: 0; accent-color: #2457d6; }
+
+.error { margin: 0; min-height: 20px; font-size: 14px; color: #c62828; }
+.notice { margin: 0; padding: 12px 14px; font-size: 14px; color: #1b45ad; background: #e8eefc; border-radius: 10px; }
+
+.btn-primary { height: 52px; border: 0; border-radius: 10px; background: #2457d6; color: #fff; font: inherit; font-size: 16px; font-weight: 700; cursor: pointer; }
+.btn-primary:hover { background: #1b45ad; }
+.btn-primary:disabled { opacity: 0.6; cursor: default; }
+.btn-primary:focus-visible { outline: 2px solid #2457d6; outline-offset: 2px; }
+
+.auth-foot { margin: 0; text-align: center; font-size: 14px; color: #5a6270; }
+.auth-foot a { color: #2457d6; font-weight: 600; }
+
+.brand-link { display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none; }
+.brand-link:focus-visible { outline: 2px solid #2457d6; outline-offset: 4px; border-radius: 6px; }
