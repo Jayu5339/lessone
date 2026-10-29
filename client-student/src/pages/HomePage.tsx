@@ -5,15 +5,16 @@ import '../styles/home.css'
 
 export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const menuRef = useRef<HTMLDivElement>(null)
+  const wrapRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!menuOpen) return
-
-    const onMouseDown = (e: MouseEvent) => {
-      if (!menuRef.current?.contains(e.target as Node)) setMenuOpen(false)
+    function onMouseDown(e: MouseEvent) {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
+        setMenuOpen(false)
+      }
     }
-    const onKeyDown = (e: KeyboardEvent) => {
+
+    function onKeyDown(e: KeyboardEvent) {
       if (e.key === 'Escape') setMenuOpen(false)
     }
 
@@ -23,23 +24,24 @@ export default function HomePage() {
       document.removeEventListener('mousedown', onMouseDown)
       document.removeEventListener('keydown', onKeyDown)
     }
-  }, [menuOpen])
+  }, [])
 
   return (
     <div className="home">
       <header className="home-header">
         <Link to="/" className="home-brand">
-          <span className="home-brand-mark" aria-hidden="true"/>
+          <span className="home-mark" aria-hidden="true"/>
           <strong>lesson-note</strong>
         </Link>
+
         <nav className="home-nav" aria-label="계정">
-          <div className="home-menu-wrap" ref={menuRef}>
+          <div className="home-menu-wrap" ref={wrapRef}>
             <button
               type="button"
               className="home-btn"
               aria-haspopup="menu"
               aria-expanded={menuOpen}
-              onClick={() => setMenuOpen((open) => !open)}
+              onClick={() => setMenuOpen((v) => !v)}
             >
               로그인
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -47,9 +49,10 @@ export default function HomePage() {
                 <path d="M6 9l6 6 6-6"/>
               </svg>
             </button>
+
             {menuOpen && (
               <div className="home-menu" role="menu" aria-label="로그인 유형">
-                <Link to="/login" role="menuitem" onClick={() => setMenuOpen(false)}>
+                <Link to="/student/login" role="menuitem" onClick={() => setMenuOpen(false)}>
                   <strong>학생 로그인</strong>
                   <span>수업을 신청하고 확인해요</span>
                 </Link>
@@ -60,7 +63,8 @@ export default function HomePage() {
               </div>
             )}
           </div>
-          <Link className="home-btn primary" to="/signup">회원가입</Link>
+
+          <Link className="home-btn primary" to="/student/signup">회원가입</Link>
         </nav>
       </header>
 
@@ -74,10 +78,10 @@ export default function HomePage() {
       </main>
 
       <footer className="home-footer">
-        <div className="home-footer-top">
-          <div className="home-footer-info">
-            <div className="home-brand small">
-              <span className="home-brand-mark" aria-hidden="true"/>
+        <div className="home-footer-inner">
+          <div className="home-footer-brand">
+            <div className="home-footer-logo">
+              <span className="home-mark small" aria-hidden="true"/>
               <strong>lesson-note</strong>
             </div>
             <p>수업 신청과 일정 관리를 한곳에서.</p>

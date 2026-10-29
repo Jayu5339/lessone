@@ -68,7 +68,7 @@ export default function SignupPage() {
         name: form.name.trim(),
         phone: form.phone.replace(/-/g, ''),
       })
-      navigate('/login', {state: {signedUp: true}})
+      navigate('/student/login', {state: {signedUp: true}})
     } catch (err) {
       const server = getServerMessage(err)
       setError((server && SERVER_MESSAGES[server]) || '회원가입에 실패했어요. 입력 내용을 확인해 주세요.')
@@ -117,7 +117,7 @@ export default function SignupPage() {
           {loading ? '가입 중...' : '계정 만들기'}
         </button>
         <p className="auth-foot">
-          이미 계정이 있으신가요? <Link to="/login">로그인</Link>
+          이미 계정이 있으신가요? <Link to="/student/login">로그인</Link>
         </p>
       </form>
     </AuthLayout>
