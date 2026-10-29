@@ -47,10 +47,10 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false)
 
   const set = (key: keyof SignupForm) => (e: ChangeEvent<HTMLInputElement>) =>
-    setForm({ ...form, [key]: e.target.value })
+    setForm({...form, [key]: e.target.value})
 
   const onPhoneChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setForm({ ...form, phone: formatPhone(e.target.value) })
+    setForm({...form, phone: formatPhone(e.target.value)})
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
@@ -68,7 +68,7 @@ export default function SignupPage() {
         name: form.name.trim(),
         phone: form.phone.replace(/-/g, ''),
       })
-      navigate('/login', { state: { signedUp: true } })
+      navigate('/login', {state: {signedUp: true}})
     } catch (err) {
       const server = getServerMessage(err)
       setError((server && SERVER_MESSAGES[server]) || '회원가입에 실패했어요. 입력 내용을 확인해 주세요.')
@@ -85,29 +85,31 @@ export default function SignupPage() {
         </div>
         <div className="field">
           <label htmlFor="username">아이디</label>
-          <input id="username" autoComplete="username" value={form.username} onChange={set('username')} />
+          <input id="username" autoComplete="username" value={form.username} onChange={set('username')}/>
           <span className="hint">영문, 숫자, _ 사용 · 4~20자</span>
         </div>
         <div className="field">
           <label htmlFor="password">비밀번호</label>
-          <input id="password" type="password" autoComplete="new-password" value={form.password} onChange={set('password')} />
+          <input id="password" type="password" autoComplete="new-password" value={form.password}
+                 onChange={set('password')}/>
           <span className="hint">8~50자</span>
         </div>
         <div className="field">
           <label htmlFor="password2">비밀번호 확인</label>
-          <input id="password2" type="password" autoComplete="new-password" value={form.password2} onChange={set('password2')} />
+          <input id="password2" type="password" autoComplete="new-password" value={form.password2}
+                 onChange={set('password2')}/>
         </div>
         <div className="field">
           <label htmlFor="name">이름</label>
-          <input id="name" autoComplete="name" value={form.name} onChange={set('name')} />
+          <input id="name" autoComplete="name" value={form.name} onChange={set('name')}/>
         </div>
         <div className="field">
           <label htmlFor="phone">전화번호</label>
           <input id="phone" type="tel" inputMode="numeric" autoComplete="tel" maxLength={13}
-                 value={form.phone} onChange={onPhoneChange} />
+                 value={form.phone} onChange={onPhoneChange}/>
         </div>
         <label className="check">
-          <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} />
+          <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)}/>
           개인정보 수집·이용 및 서비스 이용약관에 동의해요
         </label>
         <p className="error" role="alert">{error}</p>

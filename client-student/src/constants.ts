@@ -1,0 +1,1 @@
+export const INSTRUCTOR_LOGIN_URL = '/instructor/login'
