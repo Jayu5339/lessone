@@ -75,7 +75,7 @@ export default function LoginPage() {
         </button>
 
         <p className="auth-foot">
-          아직 계정이 없으신가요? <Link to="/signup">회원가입</Link>
+          아직 계정이 없으신가요?   <Link to="/signup">회원가입</Link>
         </p>
         <p className="auth-foot alt">
           강사이신가요? <a href={INSTRUCTOR_LOGIN_URL}>강사 로그인</a>
