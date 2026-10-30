@@ -30,14 +30,12 @@
 .home-brand-mark {
     width: 24px;
     height: 24px;
-    border-radius: 7px;
-    background: #2457d6;
+    flex-shrink: 0;
 }
 
 .home-brand.small .home-brand-mark {
     width: 20px;
     height: 20px;
-    border-radius: 6px;
 }
 
 .home-nav {

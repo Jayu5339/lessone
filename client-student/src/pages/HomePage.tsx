@@ -30,7 +30,7 @@ export default function HomePage() {
     <div className="home">
       <header className="home-header">
         <Link to="/" className="home-brand">
-          <span className="home-brand-mark" aria-hidden="true"/>
+          <img className="home-brand-mark" src="/logo.svg" alt=""/>
           <strong>Lesson Note</strong>
         </Link>
 
@@ -81,7 +81,7 @@ export default function HomePage() {
         <div className="home-footer-top">
           <div className="home-footer-info">
             <div className="home-brand small">
-              <span className="home-brand-mark" aria-hidden="true"/>
+              <img className="home-brand-mark" src="/logo.svg" alt=""/>
               <strong>Lesson Note</strong>
             </div>
             <p>수업 신청과 일정 관리를 한곳에서.</p>
