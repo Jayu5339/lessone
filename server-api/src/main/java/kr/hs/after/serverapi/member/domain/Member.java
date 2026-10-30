@@ -9,8 +9,6 @@ import java.time.LocalDateTime;
 @Setter
 public class Member {
     private Long id;
-    private MemberRole role;
-    private MemberStatus status;
     private String name;
     private String phone;
     private String username;

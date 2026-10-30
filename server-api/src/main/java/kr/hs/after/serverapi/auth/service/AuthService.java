@@ -5,8 +5,6 @@ import kr.hs.after.serverapi.auth.dto.request.SignupRequest;
 import kr.hs.after.serverapi.auth.dto.response.LoginResponse;
 import kr.hs.after.serverapi.common.exception.ApiException;
 import kr.hs.after.serverapi.member.domain.Member;
-import kr.hs.after.serverapi.member.domain.MemberRole;
-import kr.hs.after.serverapi.member.domain.MemberStatus;
 import kr.hs.after.serverapi.member.mapper.MemberMapper;
 import kr.hs.after.serverapi.security.JwtProvider;
 import lombok.RequiredArgsConstructor;
@@ -31,8 +29,6 @@ public class AuthService {
         }
 
         Member member = new Member();
-        member.setRole(MemberRole.STUDENT);
-        member.setStatus(MemberStatus.PENDING);
         member.setName(request.name());
         member.setPhone(request.phone());
         member.setUsername(request.username());
@@ -47,7 +43,7 @@ public class AuthService {
             throw new ApiException(HttpStatus.UNAUTHORIZED, "Invalid username or password");
         }
 
-        String token = jwtProvider.createAccessToken(member.getId(), member.getRole());
+        String token = jwtProvider.createAccessToken(member.getId());
         return new LoginResponse(token, "Bearer", jwtProvider.getExpiresInSeconds());
     }
 }

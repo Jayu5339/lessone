@@ -20,8 +20,8 @@ public class MemberService {
         if (member == null) {
             throw new ApiException(HttpStatus.NOT_FOUND, "Member not found");
         }
-        return new MeResponse(member.getRole(), member.getStatus(),
-                member.getName(), member.getUsername(), member.getPhone(), member.getCreatedAt());
+        return new MeResponse(member.getName(), member.getUsername(),
+                member.getPhone(), member.getCreatedAt());
     }
 
     public MeResponse updateMe(Long memberId, UpdateMeRequest request) {

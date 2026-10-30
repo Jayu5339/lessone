@@ -3,7 +3,6 @@ package kr.hs.after.serverapi.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import kr.hs.after.serverapi.member.domain.MemberRole;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -24,11 +23,10 @@ public class JwtProvider {
         this.accessExpirationMillis = accessExpirationMillis * 60 * 1000;
     }
 
-    public String createAccessToken(Long memberId, MemberRole role) {
+    public String createAccessToken(Long memberId) {
         Date now = new Date();
         return Jwts.builder()
                 .subject(String.valueOf(memberId))
-                .claim("role", role.name())
                 .issuedAt(now)
                 .expiration(new Date(now.getTime() + accessExpirationMillis))
                 .signWith(key)

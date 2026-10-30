@@ -1,13 +1,56 @@
 CREATE TABLE IF NOT EXISTS members (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    role VARCHAR(20) NOT NULL,
-    status VARCHAR(20) NOT NULL,
     name VARCHAR(50) NOT NULL,
     phone VARCHAR(20) NOT NULL UNIQUE,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS lessons (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    instructor_id BIGINT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL,
+    bank_name VARCHAR(30) NOT NULL,
+    account_holder VARCHAR(50) NOT NULL,
+    account_number VARCHAR(30) NOT NULL,
+    period_weeks INT NOT NULL DEFAULT 4,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-    CONSTRAINT chk_member_role CHECK (role IN ('STUDENT', 'INSTRUCTOR')),
-    CONSTRAINT chk_member_status CHECK (status IN ('ACTIVE', 'PENDING', 'INACTIVE'))
+    FOREIGN KEY (instructor_id) REFERENCES members(id)
+);
+
+CREATE TABLE IF NOT EXISTS lesson_locations (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    lesson_id BIGINT NOT NULL,
+    type VARCHAR(10) NOT NULL,
+    region VARCHAR(100) NOT NULL,
+    address_detail VARCHAR(200) NULL,
+    FOREIGN KEY (lesson_id) REFERENCES lessons(id)
+);
+
+CREATE TABLE IF NOT EXISTS lesson_prices (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    lesson_id BIGINT NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    price INT NOT NULL,
+    FOREIGN KEY (lesson_id) REFERENCES lessons(id) ON DELETE CASCADE
+ );
+
+CREATE TABLE IF NOT EXISTS lesson_availabilities (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    lesson_id BIGINT NOT NULL,
+    day_of_week TINYINT NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    FOREIGN KEY (lesson_id) REFERENCES lessons(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS lesson_durations (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    lesson_id BIGINT NOT NULL,
+    minutes INT NOT NULL,
+    FOREIGN KEY (lesson_id) REFERENCES lessons(id) ON DELETE CASCADE
 );

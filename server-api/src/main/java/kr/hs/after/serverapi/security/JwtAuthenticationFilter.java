@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -31,10 +30,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             try {
                 Claims claims = jwtProvider.parse(header.substring(7));
                 Long memberId = Long.valueOf(claims.getSubject());
-                String role = claims.get("role", String.class);
 
-                var authentication = new UsernamePasswordAuthenticationToken(
-                        memberId, null, List.of(new SimpleGrantedAuthority("ROLE_" + role)));
+                var authentication = new UsernamePasswordAuthenticationToken(memberId, null, List.of());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } catch (JwtException | IllegalArgumentException e) {
                 // Invalid or expired token: stay unauthenticated, the entry point returns 401

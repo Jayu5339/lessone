@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.hs.after.serverapi.lesson.mapper.LessonMapper">
+
+    <!-- insert -->
+    <insert id="insertLesson" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO lessons (instructor_id, name, description, bank_name, account_holder, account_number, period_weeks)
+        VALUES (#{instructorId}, #{name}, #{description}, #{bankName}, #{accountHolder}, #{accountNumber}, #{periodWeeks})
+    </insert>
+
+    <insert id="insertLocation" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO lesson_locations (lesson_id, type, region, address_detail)
+        VALUES (#{lessonId}, #{type}, #{region}, #{addressDetail})
+    </insert>
+
+    <insert id="insertPrice" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO lesson_prices (lesson_id, name, price)
+        VALUES (#{lessonId}, #{name}, #{price})
+    </insert>
+
+    <insert id="insertAvailability" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO lesson_availabilities (lesson_id, day_of_week, start_time, end_time)
+        VALUES (#{lessonId}, #{dayOfWeek}, #{startTime}, #{endTime})
+    </insert>
+
+    <insert id="insertDuration" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO lesson_durations (lesson_id, minutes)
+        VALUES (#{lessonId}, #{minutes})
+    </insert>
+
+    <!-- lesson -->
+    <select id="findById" resultType="kr.hs.after.serverapi.lesson.domain.Lesson">
+        SELECT id, instructor_id, name, description, bank_name, account_holder, account_number,
+               period_weeks, created_at, updated_at
+        FROM lessons
+        WHERE id = #{id}
+    </select>
+
+    <select id="findByInstructorId" resultType="kr.hs.after.serverapi.lesson.domain.Lesson">
+        SELECT id, instructor_id, name, description, bank_name, account_holder, account_number,
+               period_weeks, created_at, updated_at
+        FROM lessons
+        WHERE instructor_id = #{instructorId}
+        ORDER BY id DESC
+    </select>
+
+    <select id="findInstructorNameById" resultType="string">
+        SELECT name
+        FROM members
+        WHERE id = #{memberId}
+    </select>
+
+    <!-- lesson details -->
+    <select id="findLocationsByLessonId" resultType="kr.hs.after.serverapi.lesson.domain.LessonLocation">
+        SELECT id, lesson_id, type, region, address_detail
+        FROM lesson_locations
+        WHERE lesson_id = #{lessonId}
+        ORDER BY id
+    </select>
+
+    <select id="findPricesByLessonId" resultType="kr.hs.after.serverapi.lesson.domain.LessonPrice">
+        SELECT id, lesson_id, name, price
+        FROM lesson_prices
+        WHERE lesson_id = #{lessonId}
+        ORDER BY id
+    </select>
+
+    <select id="findAvailabilitiesByLessonId" resultType="kr.hs.after.serverapi.lesson.domain.LessonAvailability">
+        SELECT id, lesson_id, day_of_week, start_time, end_time
+        FROM lesson_availabilities
+        WHERE lesson_id = #{lessonId}
+        ORDER BY day_of_week, start_time
+    </select>
+
+    <select id="findDurationsByLessonId" resultType="kr.hs.after.serverapi.lesson.domain.LessonDuration">
+        SELECT id, lesson_id, minutes
+        FROM lesson_durations
+        WHERE lesson_id = #{lessonId}
+        ORDER BY minutes
+    </select>
+
+</mapper>

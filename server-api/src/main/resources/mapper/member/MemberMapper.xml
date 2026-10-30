@@ -4,8 +4,8 @@
 <mapper namespace="kr.hs.after.serverapi.member.mapper.MemberMapper">
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO members (role, status, name, phone, username, password)
-        VALUES (#{role}, #{status}, #{name}, #{phone}, #{username}, #{password})
+        INSERT INTO members (name, phone, username, password)
+        VALUES (#{name}, #{phone}, #{username}, #{password})
     </insert>
 
     <select id="existsByUsername" resultType="boolean">
@@ -17,13 +17,13 @@
     </select>
 
     <select id="findByUsername" resultType="kr.hs.after.serverapi.member.domain.Member">
-        SELECT id, role, status, name, phone, username, password, created_at, updated_at
+        SELECT id, name, phone, username, password, created_at, updated_at
         FROM members
         WHERE username = #{username}
     </select>
 
     <select id="findById" resultType="kr.hs.after.serverapi.member.domain.Member">
-        SELECT id, role, status, name, phone, username, created_at, updated_at
+        SELECT id, name, phone, username, created_at, updated_at
         FROM members
         WHERE id = #{id}
     </select>
