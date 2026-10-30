@@ -7,7 +7,7 @@ export default function AuthLayout({children}: { children: ReactNode }) {
     <div className="auth-page">
       <header className="auth-header">
         <Link to="/" className="brand-link">
-          <span className="brand-mark" aria-hidden="true"/>
+          <img className="brand-mark" src="/logo.svg" alt=""/>
           <strong>Lesson Note</strong>
         </Link>
       </header>
