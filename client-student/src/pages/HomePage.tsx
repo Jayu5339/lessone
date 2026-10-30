@@ -64,7 +64,7 @@ export default function HomePage() {
             )}
           </div>
 
-          <Link className="home-btn primary" to="/student/signup">회원가입</Link>
+          <Link className="home-btn primary" to="/signup">회원가입</Link>
         </nav>
       </header>
 

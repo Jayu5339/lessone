@@ -8,10 +8,9 @@ export default function App() {
     <Routes>
       <Route path="/" element={<HomePage/>}/>
       <Route path="/student/login" element={<LoginPage/>}/>
-      <Route path="/student/signup" element={<SignupPage/>}/>
+      <Route path="/signup" element={<SignupPage/>}/>
       <Route path="/student/account" element={<p>로그인 성공</p>}/>
       <Route path="/login" element={<Navigate to="/student/login" replace/>}/>
-      <Route path="/signup" element={<Navigate to="/student/signup" replace/>}/>
     </Routes>
   )
 }
