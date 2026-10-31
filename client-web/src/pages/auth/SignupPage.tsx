@@ -1,8 +1,8 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { signup } from '../api/auth'
-import { getServerMessage } from '../api/client'
-import AuthLayout from '../components/AuthLayout'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { signup } from '../../api/auth'
+import { getServerMessage } from '../../api/client'
+import AuthLayout from '../../components/AuthLayout'
 
 const SERVER_MESSAGES: Record<string, string> = {
   'Username already exists': '이미 사용 중인 아이디예요.',
@@ -35,6 +35,9 @@ function validate(v: SignupForm) {
 
 export default function SignupPage() {
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const loginPath = searchParams.get('role') === 'instructor' ? '/instructor/login' : '/student/login'
+
   const [form, setForm] = useState<SignupForm>({
     username: '',
     password: '',
@@ -68,7 +71,7 @@ export default function SignupPage() {
         name: form.name.trim(),
         phone: form.phone.replace(/-/g, ''),
       })
-      navigate('/student/login', {state: {signedUp: true}})
+      navigate(loginPath, {state: {signedUp: true}})
     } catch (err) {
       const server = getServerMessage(err)
       setError((server && SERVER_MESSAGES[server]) || '회원가입에 실패했어요. 입력 내용을 확인해 주세요.')
@@ -117,7 +120,7 @@ export default function SignupPage() {
           {loading ? '가입 중...' : '계정 만들기'}
         </button>
         <p className="auth-foot">
-          이미 계정이 있으신가요? <Link to="/student/login">로그인</Link>
+          이미 계정이 있으신가요? <Link to={loginPath}>로그인</Link>
         </p>
       </form>
     </AuthLayout>

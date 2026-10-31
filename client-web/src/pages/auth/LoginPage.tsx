@@ -1,11 +1,30 @@
 import { useState, type FormEvent } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { login } from '../api/auth'
-import { getStatus } from '../api/client'
-import { INSTRUCTOR_LOGIN_URL } from '../constants'
-import AuthLayout from '../components/AuthLayout'
+import { login } from '../../api/auth'
+import { getStatus } from '../../api/client'
+import AuthLayout from '../../components/AuthLayout'
 
-export default function LoginPage() {
+const ROLE = {
+  student: {
+    title: '학생 로그인',
+    next: '/student/account',
+    signup: '/signup',
+    altText: '강사이신가요?',
+    altLabel: '강사 로그인',
+    altTo: '/instructor/login',
+  },
+  instructor: {
+    title: '강사 로그인',
+    next: '/instructor/lessons',
+    signup: '/signup?role=instructor',
+    altText: '학생이신가요?',
+    altLabel: '학생 로그인',
+    altTo: '/student/login',
+  },
+} as const
+
+export default function LoginPage({role}: { role: 'student' | 'instructor' }) {
+  const r = ROLE[role]
   const navigate = useNavigate()
   const location = useLocation()
   const signedUp = (location.state as { signedUp?: boolean } | null)?.signedUp
@@ -27,7 +46,7 @@ export default function LoginPage() {
     try {
       const data = await login({username: username.trim(), password})
       localStorage.setItem('accessToken', data.accessToken)
-      navigate('/student/account')
+      navigate(r.next)
     } catch (err) {
       setError(
         getStatus(err) === 401
@@ -43,7 +62,7 @@ export default function LoginPage() {
     <AuthLayout>
       <form className="auth-card" onSubmit={handleSubmit}>
         <div className="auth-head">
-          <h1>학생 로그인</h1>
+          <h1>{r.title}</h1>
           <p>아이디와 비밀번호를 입력해 주세요.</p>
         </div>
 
@@ -75,10 +94,10 @@ export default function LoginPage() {
         </button>
 
         <p className="auth-foot">
-          아직 계정이 없으신가요? <Link to="/signup">회원가입</Link>
+          아직 계정이 없으신가요? <Link to={r.signup}>회원가입</Link>
         </p>
         <p className="auth-foot alt">
-          강사이신가요? <a href={INSTRUCTOR_LOGIN_URL}>강사 로그인</a>
+          {r.altText} <Link to={r.altTo}>{r.altLabel}</Link>
         </p>
       </form>
     </AuthLayout>
