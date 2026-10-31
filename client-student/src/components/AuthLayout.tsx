@@ -8,7 +8,7 @@ export default function AuthLayout({children}: { children: ReactNode }) {
       <header className="auth-header">
         <Link to="/" className="brand-link">
           <img className="brand-mark" src="/logo.svg" alt=""/>
-          <strong>Lesson Note</strong>
+          <strong>LessOne</strong>
         </Link>
       </header>
       <main className="auth-main">{children}</main>

@@ -31,7 +31,7 @@ export default function HomePage() {
       <header className="home-header">
         <Link to="/" className="home-brand">
           <img className="home-brand-mark" src="/logo.svg" alt=""/>
-          <strong>Lesson Note</strong>
+          <strong>LessOne</strong>
         </Link>
 
         <nav className="home-nav" aria-label="계정">
@@ -74,7 +74,7 @@ export default function HomePage() {
           <br/>
           한곳에서 간편하게
         </h1>
-        <p>Lesson Note에서 강사의 수업을 신청하고 내 수업 일정을 한눈에 확인해 보세요.</p>
+        <p>LessOne에서 강사의 수업을 신청하고 내 수업 일정을 한눈에 확인해 보세요.</p>
       </main>
 
       <footer className="home-footer">
@@ -82,7 +82,7 @@ export default function HomePage() {
           <div className="home-footer-info">
             <div className="home-brand small">
               <img className="home-brand-mark" src="/logo.svg" alt=""/>
-              <strong>Lesson Note</strong>
+              <strong>LessOne</strong>
             </div>
             <p>수업 신청과 일정 관리를 한곳에서.</p>
           </div>
@@ -92,7 +92,7 @@ export default function HomePage() {
             <a href="#">문의</a>
           </nav>
         </div>
-        <p className="home-copy">© 2026 Lesson Note. All rights reserved.</p>
+        <p className="home-copy">© 2026 LessOne. All rights reserved.</p>
       </footer>
     </div>
   )

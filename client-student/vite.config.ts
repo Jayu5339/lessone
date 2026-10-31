@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://api.lessonnote.net',
+        target: 'https://api.lessone.kr',
         changeOrigin: true,
       }
     }
