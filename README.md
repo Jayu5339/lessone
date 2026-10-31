@@ -1,12 +1,15 @@
 <div align="center">
 
-# 📝 LessOne (레스원)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="client-student/public/logo-horizontal-dark.svg">
+  <img src="client-student/public/logo-horizontal.svg" alt="LessOne" height="72">
+</picture>
 
-**A 1:1 lesson management service for scheduling, session tracking, and waitlist management.**
+<br/><br/>
 
-학생과 강사를 위한 1:1 레슨 신청, 회차 관리, 대기열 관리 플랫폼
+**1:1 레슨을 만들고, 찾고, 신청하는 플랫폼**
 
-🔗 **https://lessone.kr**
+[lessone.kr](https://lessone.kr)
 
 <br/>
 
@@ -18,26 +21,42 @@
 
 </div>
 
----
+<br/>
 
-## 📌 Features (주요 기능)
+## 소개
 
-* **🎓 Lesson Creation**: 강사가 수업 이름, 지역(내 장소/방문), 가능 요일·시간, 수업 시간, 가격, 보강·정원 정책을 직접 설정
-* **🔎 Lesson Search**: 학생이 수업을 검색하고 상세 정보를 확인 (계좌, 상세 주소는 신청 확정 후 공개)
-* **📅 Smart Scheduling**: 가능한 시간대를 골라 신청하고 강사가 승인하는 방식
-* **⏱️ Session Tracking**: 학생별 레슨 횟수 자동 차감 및 이력 관리
-* **📋 Waitlist Management**: 정원이 차면 대기 신청, 순번 알림
-* **🔐 JWT Auth**: Spring Security + JWT 기반 인증 (강사는 수업을 만든 회원)
+LessOne(레스원)은 강사가 1:1 레슨을 직접 개설하고, 학생이 원하는 레슨을 찾아 신청하는 서비스입니다.
 
----
+## 기능
 
-## 🏗️ Architecture & Tech Stack
+| 기능 | 설명 | 상태 |
+|---|---|---|
+| 레슨 개설 | 장소, 가능 시간, 가격, 정원과 보충 정책 설정 | 완료 |
+| 레슨 상세 | 계좌와 상세 주소는 신청 확정 후 공개 | 완료 |
+| 회원 인증 | Spring Security + JWT | 완료 |
+| 레슨 검색 | 키워드 검색 | 예정 |
+| 수강 신청 | 시간대 선택 후 강사 승인 | 예정 |
+| 회차 관리 | 레슨 횟수 자동 차감과 이력 | 예정 |
+| 대기열 | 정원 초과 시 대기 신청 | 예정 |
 
-### Monorepo Structure
+## 기술 스택
+
+| 영역 | 기술 |
+|---|---|
+| Backend | Java 21, Spring Boot 3.5.3, Spring Security, JWT, MyBatis |
+| Database | H2 (MySQL 이전 예정) |
+| Frontend | React, TypeScript, Vite |
+| Infra | AWS EC2, Nginx, Let's Encrypt, GitHub Actions |
+
+## 구조
 
 ```text
 lessone/
-├── server-api/         # Spring Boot 3.5.3 (Java 21) - REST API Server
-├── client-student/     # React + TypeScript (학생용 웹)
-└── client-instructor/  # React + TypeScript (강사용 웹, 예정)
+├── server-api/         # REST API 서버
+├── client-student/     # 학생용 웹
+└── client-instructor/  # 강사용 웹 (예정)
 ```
+
+## 배포
+
+`main`에 푸시하면 바뀐 폴더에 맞는 GitHub Actions가 실행되어 EC2에 배포됩니다.
