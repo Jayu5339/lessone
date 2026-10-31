@@ -1,4 +1,4 @@
-# client-student
+# client-web
 
 lesson-note 수강생용 웹 클라이언트예요. React + TypeScript + Vite로 만들었어요.
 

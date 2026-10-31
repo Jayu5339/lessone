@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="client-student/public/logo-horizontal-dark.svg">
-  <img src="client-student/public/logo-horizontal.svg" alt="LessOne" height="72">
+  <source media="(prefers-color-scheme: dark)" srcset="client-web/public/logo-horizontal-dark.svg">
+  <img src="client-web/public/logo-horizontal.svg" alt="LessOne" height="72">
 </picture>
 
 <br/><br/>
@@ -52,9 +52,8 @@ LessOne(레스원)은 강사가 1:1 레슨을 직접 개설하고, 학생이 원
 
 ```text
 lessone/
-├── server-api/         # REST API 서버
-├── client-student/     # 학생용 웹
-└── client-instructor/  # 강사용 웹 (예정)
+├── server-api/    # REST API 서버
+├── client-web/    # 학생용 웹 (학생 + 강사)
 ```
 
 ## 배포
