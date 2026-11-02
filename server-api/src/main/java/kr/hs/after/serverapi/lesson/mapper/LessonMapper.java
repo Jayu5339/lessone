@@ -6,6 +6,7 @@ import kr.hs.after.serverapi.lesson.domain.LessonDuration;
 import kr.hs.after.serverapi.lesson.domain.LessonLocation;
 import kr.hs.after.serverapi.lesson.domain.LessonPrice;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -38,4 +39,7 @@ public interface LessonMapper {
     List<LessonAvailability> findAvailabilitiesByLessonId(Long lessonId);
 
     List<LessonDuration> findDurationsByLessonId(Long lessonId);
+
+    // lesson search
+    List<Lesson> search(@Param("keyword") String keyword, @Param("size") int size);
 }

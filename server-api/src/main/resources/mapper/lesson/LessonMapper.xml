@@ -52,6 +52,22 @@
         WHERE id = #{memberId}
     </select>
 
+    <!-- lesson search (account info is intentionally not selected) -->
+    <select id="search" resultType="kr.hs.after.serverapi.lesson.domain.Lesson">
+        SELECT l.id, l.instructor_id, l.name, l.description, l.period_weeks, l.created_at, l.updated_at
+        FROM lessons l
+        JOIN members m ON m.id = l.instructor_id
+        <where>
+            <if test="keyword != null and keyword != ''">
+                l.name LIKE CONCAT('%', #{keyword}, '%')
+                OR l.description LIKE CONCAT('%', #{keyword}, '%')
+                OR m.name LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
+        ORDER BY l.id DESC
+        LIMIT #{size}
+    </select>
+
     <!-- lesson details -->
     <select id="findLocationsByLessonId" resultType="kr.hs.after.serverapi.lesson.domain.LessonLocation">
         SELECT id, lesson_id, type, region, address_detail

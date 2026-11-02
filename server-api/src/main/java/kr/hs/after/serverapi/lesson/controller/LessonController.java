@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import kr.hs.after.serverapi.lesson.dto.request.CreateLessonRequest;
 import kr.hs.after.serverapi.lesson.dto.response.CreateLessonResponse;
 import kr.hs.after.serverapi.lesson.dto.response.LessonDetailResponse;
+import kr.hs.after.serverapi.lesson.dto.response.LessonSearchResponse;
 import kr.hs.after.serverapi.lesson.dto.response.LessonSummaryResponse;
 import kr.hs.after.serverapi.lesson.service.LessonService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,12 @@ public class LessonController {
     public ResponseEntity<CreateLessonResponse> create(@AuthenticationPrincipal Long memberId,
                                                        @Valid @RequestBody CreateLessonRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(lessonService.create(memberId, request));
+    }
+
+    @GetMapping
+    public List<LessonSearchResponse> search(@RequestParam(required = false) String keyword,
+                                             @RequestParam(defaultValue = "10") int size) {
+        return lessonService.search(keyword, size);
     }
 
     @GetMapping("/me")

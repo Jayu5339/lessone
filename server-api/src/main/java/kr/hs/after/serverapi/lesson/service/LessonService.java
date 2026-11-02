@@ -10,6 +10,7 @@ import kr.hs.after.serverapi.lesson.dto.request.CreateLessonRequest;
 import kr.hs.after.serverapi.lesson.dto.request.CreateLessonRequest.AvailabilityItem;
 import kr.hs.after.serverapi.lesson.dto.response.CreateLessonResponse;
 import kr.hs.after.serverapi.lesson.dto.response.LessonDetailResponse;
+import kr.hs.after.serverapi.lesson.dto.response.LessonSearchResponse;
 import kr.hs.after.serverapi.lesson.dto.response.LessonSummaryResponse;
 import kr.hs.after.serverapi.lesson.mapper.LessonMapper;
 import lombok.RequiredArgsConstructor;
@@ -90,6 +91,27 @@ public class LessonService {
                                 .map(loc -> new LessonSummaryResponse.LocationItem(
                                         loc.getType(), loc.getRegion(), loc.getAddressDetail()))
                                 .toList()))
+                .toList();
+    }
+
+    public List<LessonSearchResponse> search(String keyword, int size) {
+        String k = keyword == null ? null : keyword.trim();
+        int limit = Math.max(1, Math.min(size, 30));
+
+        return lessonMapper.search(k, limit).stream()
+                .map(l -> new LessonSearchResponse(
+                        l.getId(),
+                        l.getName(),
+                        l.getDescription(),
+                        lessonMapper.findInstructorNameById(l.getInstructorId()),
+                        lessonMapper.findLocationsByLessonId(l.getId()).stream()
+                                .map(LessonLocation::getRegion)
+                                .distinct()
+                                .toList(),
+                        lessonMapper.findPricesByLessonId(l.getId()).stream()
+                                .map(LessonPrice::getPrice)
+                                .min(Integer::compare)
+                                .orElse(null)))
                 .toList();
     }
 
